@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Green Time Settings</title>
+
+  <link rel="stylesheet" href="../../css/jquery.dynatable.css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="../../css/table.css" media="screen" title="no title" charset="utf-8">
+  <script src="../../js/jquery.min.js"></script>
+
+  <script src="../../js/jquery.dynatable.js"></script>
+
+  <script src="../../js/settings.js"></script>
+</head>
+
+<body>
+  <div>
+    Add new rule
+  </div>
+  <div>
+    <input type="text" id="newRuleUrl" placeholder="URL"/>
+    <input type="text" id="newRuleJustification"placeholder="Justification"/>
+  </div>
+  <br/>
+  <div>
+    <button id="newRuleBtn">Add</button>
+  </div>
+
+<br/><br/><br/>
+
+
+
+  <table id="blackList" class="CSSTableGenerator">
+    <thead class="thead">
+      <th>url</th>
+      <th>justification</th>
+      <th>created_at</th>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+</body>
+
+</html>

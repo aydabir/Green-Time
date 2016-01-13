@@ -1,0 +1,35 @@
+{
+  "name": "green-time",
+  "description": "Eliminate distractions to work more efficiently.",
+  "main": "index.js",
+  "authors": [
+    "aydabir team"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "time",
+    "efficiency",
+    "distraction",
+    "proactivity",
+    "focus",
+    "work",
+    "leech",
+    "management",
+    "working"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "~2.2.0",
+    "dynatable": "~0.3.1",
+    "pnotify": "~3.0.0"
+  }
+}

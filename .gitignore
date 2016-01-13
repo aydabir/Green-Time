@@ -1,0 +1,5 @@
+# Ignored Files
+
+/product/**/*
+/dev/bower_components/**/*
+/dev/node_modules/**/*
