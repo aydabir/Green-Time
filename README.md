@@ -3,7 +3,7 @@ A browser plugin to help people better use their time. It aims to use a kinder a
 
 ##Development Guide
 
-> firstly you need [npm](https://nodejs.org/en/)  & [bower](http://bower.io/)
+> firstly you need [npm](https://nodejs.org/en/)  & [bower](http://bower.io/) & [gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
 
 1. Clone the repository
 2. Run your favorite command line
