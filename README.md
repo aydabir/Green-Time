@@ -1,7 +1,7 @@
 # Green-Time
 A browser plugin to help people better use their time. It aims to use a kinder approach by not blocking the pages, but just reminding to user when they visit the pages. So the user gives the final decision of leaving a page, so they are not faced with an external force.
 
-##Development Guide
+##Getting Started
 
 > firstly you need [npm](https://nodejs.org/en/)  & [bower](http://bower.io/) & [gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
 

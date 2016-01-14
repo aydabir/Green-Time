@@ -13,6 +13,7 @@
   "background": {
     "persistent": true,
     "scripts": [
+      "resources/js/core/backgroundCore.js",
       "resources/js/background.js"
     ]
   },
@@ -34,10 +35,11 @@
       "https://*/*", "http://*/*"
     ],
     "css": [
-      "resources/css/main.css"
+      "resources/css/client.css"
     ],
     "js": [
-      "resources/js/main.js"
+      "resources/js/core/clientCore.js",
+      "resources/js/client.js"
     ]
   }]
 }

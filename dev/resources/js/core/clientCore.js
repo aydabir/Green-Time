@@ -25,10 +25,14 @@ chrome.extension.sendMessage({text:"getStuff"},function(reponse){
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (!sender.tab) {
-      alert(request.justification);
-      console.log(request);
+      onMessage(
+        {
+          request : request,
+          sender : sender
+        }
+      );
       sendResponse({
         received: true
       });
     }
-  });
+});
