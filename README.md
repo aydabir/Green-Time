@@ -22,22 +22,22 @@ Please feel free for contacting us.
 
 
 - [ ] Show notification modal
-- [] URL-List control
+- [ ] URL-List control
 - [ ] Time tracking
   - [ ] Periodic Notifications
 - [ ] Plug-in settings UI
 - [ ] Activity time customization
   - [ ] Daytime
   - [ ] Weekdays
-- [] URL-List Customization
-  - [x] Single list
+- [ ] URL-List Customization
+  - [ ] Single list
   - [ ] Multi list
 - [ ] Modal Customization
   - [ ] OK-button
   - [ ] Continue/Cancel
   - [ ] Auto-close
-- [] Message Customization
-  - [] Text
+- [ ] Message Customization
+  - [ ] Text
   - [ ] Multi-media
 - [ ] Reaction Customization
   - [ ] Close tab
