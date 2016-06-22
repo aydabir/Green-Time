@@ -1,0 +1,44 @@
+{
+  "name": "GREEN TIME",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "A browser plugin to help people better use their time",
+  "homepage_url": "https://github.com/aydabir/Green-Time",
+  "icons": {
+    "16": "./resources/images/icons/icon16.png",
+    "48": "./resources/images/icons/icon48.png",
+    "128": "./resources/images/icons/icon128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "./scripts/core/background.js",
+      "./scripts/extend/background.js"
+    ]
+  },
+  "options_page": "./views/options.html",
+  "browser_action": {
+    "default_icon": "./resources/images/icons/icon19.png",
+    "default_title": "Show Green Time Box",
+    "default_popup": "./views/action.html"
+  },
+  "permissions": [
+    "contentSettings",
+    "cookies",
+    "tabs",
+    "storage",
+    "https://*/*,http://*/*"
+  ],
+  "content_scripts": [{
+    "matches": [
+      "https://*/*", "http://*/*"
+    ],
+    "css": [
+      "./styles/client.css"
+    ],
+    "js": [
+      "./scripts/core/client.js",
+      "./scripts/extend/client.js"
+    ]
+  }]
+}

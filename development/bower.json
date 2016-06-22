@@ -1,0 +1,23 @@
+{
+  "name": "green-time",
+  "description": "It helps your focus with blocking unwanted websites.",
+  "main": "index.js",
+  "authors": [
+    "AydaBir"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "focus",
+    "work",
+    "block",
+    "website"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
