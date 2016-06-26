@@ -9,7 +9,6 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 });
 
 chrome.tabs.onCreated.addListener(function(tabId, changeInfo, tab) {
-  console.log("onCreated "+tab.url);
   // check if the page should be filtered
   doFilter = filterTab(tab);
   // show green-pass if it does
@@ -20,6 +19,9 @@ chrome.tabs.onCreated.addListener(function(tabId, changeInfo, tab) {
 
 
 function filterTab(tab){
+  if(!tab || !tab.url){
+    return false;
+  }
   var tabURL = tab.url;
   var n = tabURL.search("facebook.com");
 
@@ -33,7 +35,7 @@ function filterTab(tab){
 
 var fcnHandleGreenPass = function handleGreenPass(tab){
   // call green-pass javascript
-  chrome.tabs.executeScript(null, {file: "./scripts/extend/green-pass.js"});
+  // chrome.tabs.executeScript(null, {file: "./scripts/extend/green-pass.js"});
 }
 
 function bringGreenPass(tab){

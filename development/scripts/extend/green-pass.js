@@ -1,12 +1,16 @@
-debugger;
-console.log("Green-pass is up and running");
+console.log("Green-pass");
 
-var fcnLeaveTab = function leaveTab(){
-  console.log("green-pass leaveTab");
-  chrome.tabs.query({'active': true}, function(tabs) {
-    // Close current active tab
-    chrome.tabs.remove(tabs[0].id);
+document.addEventListener('DOMContentLoaded', function() {
+	console.log("DOMContentLoaded");
+	// Leave Button
+    var leaveBtn = document.getElementById('btnLeave');
+    leaveBtn.addEventListener('click', function() {
+        window.close();
   });
-}
+	// Visit Button
+	var visitBtn = document.getElementById('btnVisit');
+    visitBtn.addEventListener('click', function() {
+        window.location="http://www.facebook.com"
 
-document.getElementById("btnLeave").addEventListener("click", fcnLeaveTab);
+    });
+});
