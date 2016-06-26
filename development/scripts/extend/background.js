@@ -1,6 +1,6 @@
 // Properties of background script
 var isWaiting = false; // waiting now? control variable
-var waitTime = 5*60*1000; // bekleme süresi: 5 dakika
+var minuteMultiplier = 60*1000; // bekleme süresi: 5 dakika
 // TODO: Customizable waiting time
 
 // Funcitons of background script
@@ -26,7 +26,7 @@ chrome.tabs.onCreated.addListener(function(tabId, changeInfo, tab) {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     console.log("Message received: " + request.topic);
     if (request.topic == "start waiting"){
-      startWaiting();
+      startWaiting(request.time);
     }
 
 });
@@ -62,11 +62,12 @@ function bringGreenPass(tab){
   chrome.tabs.update(tab.tabId, {url: "./views/green-pass.html"}, fcnHandleGreenPass);
 }
 
-function startWaiting(){
-  console.log("Waiting has started");
+function startWaiting(time){
   isWaiting = true;
+  var totalWait = time*minuteMultiplier;
   // start timer for waiting
-  setTimeout(endWaiting, waitTime);
+  setTimeout(endWaiting, totalWait);
+  console.log(totalWait + " Waiting has started");
 }
 
 function endWaiting(){
