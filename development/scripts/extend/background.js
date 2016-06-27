@@ -10,7 +10,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   doFilter = filterTab(tab);
   // show green-pass if it does
   if(doFilter){
-    bringGreenPass(tab)
+    bringGreenPass(tab);
   }
 });
 
@@ -19,7 +19,7 @@ chrome.tabs.onCreated.addListener(function(tabId, changeInfo, tab) {
   doFilter = filterTab(tab);
   // show green-pass if it does
   if(doFilter){
-    bringGreenPass(tab)
+    bringGreenPass(tab);
   }
 });
 
@@ -27,6 +27,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     console.log("Message received: " + request.topic);
     if (request.topic == "start waiting"){
       startWaiting(request.time);
+    }else if (request.topic == "console log") {
+      printLog(request.log);
     }
 
 });
@@ -62,6 +64,7 @@ function bringGreenPass(tab){
   chrome.tabs.update(tab.tabId, {url: "./views/green-pass.html"}, fcnHandleGreenPass);
 }
 
+// starts waiting the given time*minutes
 function startWaiting(time){
   isWaiting = true;
   var totalWait = time*minuteMultiplier;
@@ -73,4 +76,15 @@ function startWaiting(time){
 function endWaiting(){
   console.log("Waiting has ended");
   isWaiting = false;
+}
+
+// prints the logs coming from other scripts
+// to background console for easier debug
+function printLog(strLog){
+  if (!strLog) {
+    console.log("Please assign the request.log field \
+    in \"console log\" messages");
+  }else {
+    console.log(strLog);
+  }
 }
