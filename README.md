@@ -22,7 +22,7 @@ Please feel free for contacting us.
 
 
 - [ ] Show notification modal
-- [ ] URL-List control
+- [X] URL-List control
 - [ ] Time tracking
   - [ ] Periodic Notifications
 - [ ] Plug-in settings UI
@@ -30,7 +30,7 @@ Please feel free for contacting us.
   - [ ] Daytime
   - [ ] Weekdays
 - [ ] URL-List Customization
-  - [ ] Single list
+  - [X] Single list
   - [ ] Multi list
 - [ ] Modal Customization
   - [ ] OK-button
