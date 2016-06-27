@@ -5,7 +5,6 @@ var minuteMultiplier = 60*1000; // bekleme süresi: 5 dakika
 var urlList = ["facebook.com"];
 var passUrlList = [];
 
-
 // Funcitons of background script
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   console.log("onUpdated "+tab.url);
@@ -39,6 +38,23 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     }
 
 });
+
+// a general function to restore options
+function load_options() {
+  chrome.storage.sync.get({
+    urlList: urlList
+  }, function(items) {
+    // control the undefined case
+    if(!items || !items.urlList){
+      return;
+    }
+
+    urlList = items.urlList
+
+  });
+  // log the bg console
+  console.log("options loaded");
+}
 
 
 function filterTab(tab){
@@ -120,3 +136,8 @@ function printLog(strLog){
     console.log(strLog);
   }
 }
+
+// ------------------- initial run -------------------------------------------
+
+// load options initially
+load_options();

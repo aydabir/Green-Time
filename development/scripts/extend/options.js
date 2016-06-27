@@ -33,8 +33,12 @@ function save_options() {
   chrome.runtime.sendMessage({topic: "console log",log:"options saved"});
 }
 
-// a general function to restore options
-function restore_options(optionsPage=false) {
+// Restores select box and checkbox state using the preferences
+// stored in chrome.storage.
+function handleDomLoaded(){
+
+  document.getElementById('save').addEventListener('click', save_options);
+
   chrome.storage.sync.get({
     urlList: urlList
   }, function(items) {
@@ -47,9 +51,6 @@ function restore_options(optionsPage=false) {
     // update the bg options
     chrome.runtime.sendMessage({topic: "update options",options:items});
 
-    // rest will be run only in options page
-    if(!optionsPage) return;
-
     var strUrls = "";
     for (var i=0; i<urlList.length; i++){
       strUrls = strUrls + urlList[i] + "\n";
@@ -59,16 +60,7 @@ function restore_options(optionsPage=false) {
 
   });
   // log the bg console
-  chrome.runtime.sendMessage({topic: "console log",log:"options restored"});
-}
-
-// Restores select box and checkbox state using the preferences
-// stored in chrome.storage.
-function handleDomLoaded(){
-
-  document.getElementById('save').addEventListener('click', save_options);
-
-  restore_options(true);
+  chrome.runtime.sendMessage({topic: "console log",log:"options loaded"});
 }
 
 document.addEventListener('DOMContentLoaded', handleDomLoaded);
