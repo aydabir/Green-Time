@@ -1,7 +1,10 @@
 // Properties of background script
 var isWaiting = false; // waiting now? control variable
 var minuteMultiplier = 60*1000; // bekleme süresi: 5 dakika
-// TODO: Customizable waiting time
+// TODO: Waiting time options
+var urlList = ["facebook.com"];
+var passUrlList = [];
+
 
 // Funcitons of background script
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
@@ -29,6 +32,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       startWaiting(request.time);
     }else if (request.topic == "console log") {
       printLog(request.log);
+    }else if (request.topic == "update options") {
+      updateOptions(request.options);
+    }else if (request.topic == "green-pass url") {
+      sendGreenPassUrl(sender.tab.id);
     }
 
 });
@@ -44,24 +51,25 @@ function filterTab(tab){
     return false;
   }
 
-  var tabURL = tab.url;
-  var n = tabURL.search("facebook.com");
+  // iterate all urls in list
+  len = urlList.length;
+  for(var i=0; i<len; i++){
+    // if empty then skip
+    if(urlList[i].length <= 0) continue;
 
-  if (n >= 0){
-    return true;
+    var n = tab.url.search(urlList[i]);
+    // does it match to the url?
+    if (n >= 0) return true;
   }
 
   return false;
 }
 
-var fcnHandleGreenPass = function handleGreenPass(tab){
-  // call green-pass javascript
-  // chrome.tabs.executeScript(null, {file: "./scripts/extend/green-pass.js"});
-}
-
 function bringGreenPass(tab){
   // Show the green-pass view
-  chrome.tabs.update(tab.tabId, {url: "./views/green-pass.html"}, fcnHandleGreenPass);
+  chrome.tabs.update(tab.id, {url: "./views/green-pass.html"});
+  // record passUrl to inform green-pass later
+  passUrlList[tab.id] = tab.url;
 }
 
 // starts waiting the given time*minutes
@@ -76,6 +84,30 @@ function startWaiting(time){
 function endWaiting(){
   console.log("Waiting has ended");
   isWaiting = false;
+}
+
+// sends green-pass page the url to direct, if user choses to 'visit'
+function sendGreenPassUrl(tabId){
+  // undefined?
+  if (!tabId) {
+    console.log("Green-pass tab id is undefined!");
+    return;
+  }
+  // inform Green-pass
+  chrome.tabs.sendMessage(tabId, {passUrl: passUrlList[tabId]});
+}
+
+// updates the options with the option values coming with message
+function updateOptions(options){
+  // undefined?
+  if (!options) {
+    console.log("Options are undefined!");
+    return;
+  }
+  // assign bg variables
+  urlList = options.urlList;
+
+  console.log("Options are updated.");
 }
 
 // prints the logs coming from other scripts
