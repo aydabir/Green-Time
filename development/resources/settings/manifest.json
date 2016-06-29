@@ -12,8 +12,8 @@
   "background": {
     "persistent": true,
     "scripts": [
-      "./scripts/core/background.js",
-      "./scripts/extend/background.js"
+      "./scripts/extend/background.js",
+      "./scripts/core/background.js"
     ]
   },
   "options_ui": {
