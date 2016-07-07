@@ -78,7 +78,8 @@ function load_options() {
   console.log("options loaded");
 }
 
-// Filters the tab if it is specified by the user URL-list
+// Decides if the tab should be filtered or not
+// Checks the user URL-list
 // Also controls the waiting time
 function filterTab(tab){
   // check undefined (new tab situation)
@@ -158,7 +159,8 @@ function printLog(strLog){
   if (!strLog) {
     console.log("Please assign the request.log field \
     in \"console log\" messages");
-  }else {
-    console.log(strLog);
+    return;
   }
+
+  console.log(strLog);
 }

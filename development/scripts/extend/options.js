@@ -1,21 +1,14 @@
 // more or less what is taken from https://developer.chrome.com/extensions/optionsV2 :)
 var urlList = [];
 
-// Saves options to chrome.storage.sync.
+// Saves options to chrome.storage.sync
 function save_options() {
   var strUrls = document.getElementById('urlList').value;
 
-  urlList = strUrls.split("\n");
+  // create an array of urls from the str
+  urlList = parseUrls(strUrls);
 
-  for(var i=0; i<urlList.length; i++){
-    // strip the string
-    urlList[i] = urlList[i].replace(/^\s+|\s+$/g, '');
-    // if empty then remove
-    if(urlList[i].length <= 0){
-      urlList.splice(i, 1);
-    }
-  }
-
+  // option items
   items = {
     urlList: urlList
   };
@@ -26,41 +19,67 @@ function save_options() {
     status.textContent = 'Options saved.';
     setTimeout(function() {status.textContent = '';}, 1000);
   });
-  // update bg options
-  chrome.runtime.sendMessage({topic: "update options",options:items});
 
+  // update bg options via message
+  chrome.runtime.sendMessage({topic: "update options",options:items});
   // log the bg console
   chrome.runtime.sendMessage({topic: "console log",log:"options saved"});
 }
 
 // Restores select box and checkbox state using the preferences
-// stored in chrome.storage.
+// stored in chrome.storage.sync
 function handleDomLoaded(){
-
+  // start listening the save button
   document.getElementById('save').addEventListener('click', save_options);
 
   chrome.storage.sync.get({
     urlList: urlList
   }, function(items) {
     // control the undefined case
-    if(!items || !items.urlList){
-      return;
-    }
+    if(!items) return;
 
-    urlList = items.urlList;
+    var strUrls = updateUrls(items.urlList);
+    document.getElementById('urlList').value = strUrls;
+
     // update the bg options
     chrome.runtime.sendMessage({topic: "update options",options:items});
-
-    var strUrls = "";
-    for (var i=0; i<urlList.length; i++){
-      strUrls = strUrls + urlList[i] + "\n";
-    }
-
-    document.getElementById('urlList').value = strUrls;
 
   });
   // log the bg console
   chrome.runtime.sendMessage({topic: "console log",log:"options loaded"});
+}
+
+
+function parseUrls(strUrls) {
+  newUrlList = strUrls.split("\n");
+
+  for(var i=0; i<newUrlList.length; i++){
+    // strip the string
+    newUrlList[i] = newUrlList[i].replace(/^\s+|\s+$/g, '');
+    // if empty then remove
+    if(newUrlList[i].length <= 0){
+      // removes it from the list
+      newUrlList.splice(i, 1);
+    }
+  }
+  return newUrlList;
+}
+
+
+// update the urlList, inform background script
+// Returns the list of urls as str: strUrls
+function updateUrls(newUrlList){
+  if(!newUrlList) return "";
+
+  urlList = newUrlList;
+
+  // add to str one by one
+  var strUrls = "";
+  for (var i=0; i<urlList.length; i++){
+    strUrls = strUrls + urlList[i] + "\n";
+  }
+
+  return strUrls;
 }
 
 document.addEventListener('DOMContentLoaded', handleDomLoaded);
