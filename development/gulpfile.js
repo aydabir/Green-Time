@@ -32,7 +32,8 @@ const paths = {
     resources   : pluginBase.Path('resources'),
     images      : pluginBase.Path('resources/images'),
     settings    : pluginBase.Path('resources/settings'),
-    thirdParty  : pluginBase.Path('third_party')
+    thirdParty  : pluginBase.Path('third_party'),
+    fonts       : pluginBase.Path('third_party/fonts')
 };
 
 // Solution for double dot and double backslash problem of gulp-path package with self called function
@@ -84,7 +85,7 @@ gulp.task('third_party', () => {
 		.pipe(changed(paths.thirdParty.dest))
 		.pipe(gulpif(settings.autoDestToProduct, gulp.dest(paths.thirdParty.dest) ))
 		.pipe(gulpif(settings.autoDestToProduct, count('<%= counter %> thirdParty build & distributed') ));
-	return thirdParty;
+
 });
 
 /*
