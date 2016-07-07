@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   chrome.runtime.onMessage.addListener(handleMessage);
 
+  // procedures to call at the start
   initialize();
 
 });
