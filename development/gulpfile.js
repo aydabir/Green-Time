@@ -31,7 +31,8 @@ const paths = {
     styles      : pluginBase.Path('styles','.css'),
     resources   : pluginBase.Path('resources'),
     images      : pluginBase.Path('resources/images'),
-    settings    : pluginBase.Path('resources/settings')
+    settings    : pluginBase.Path('resources/settings'),
+    thirdParty  : pluginBase.Path('third_party')
 };
 
 // Solution for double dot and double backslash problem of gulp-path package with self called function
@@ -43,7 +44,7 @@ const paths = {
 })();
 
 /* Build bundle  */
-gulp.task('build',["build_scripts","build_styles","build_views","build_resource"]);
+gulp.task('build',["build_scripts","build_styles","build_views","third_party","build_resource"]);
 
 gulp.task('build_scripts', () => {
     let scripts = gulp.src(paths.scripts.src)
@@ -70,9 +71,20 @@ gulp.task('build_styles', () => {
 gulp.task('build_views', () => {
 	let views = gulp.src(paths.views.src)
 		.pipe(changed(paths.views.dest))
-		.pipe(gulpif(settings.autoDestToProduct, gulp.dest(paths.styles.dest) ))
+		.pipe(gulpif(settings.autoDestToProduct, gulp.dest(paths.views.dest) ))
 		.pipe(gulpif(settings.autoDestToProduct, count('<%= counter %> views build & distributed') ));
 	return views;
+});
+
+/*
+ * Build_styles : get sass files and compile them to css then dest to product if auto dest is available
+ */
+gulp.task('third_party', () => {
+	let thirdParty = gulp.src(paths.thirdParty.src)
+		.pipe(changed(paths.thirdParty.dest))
+		.pipe(gulpif(settings.autoDestToProduct, gulp.dest(paths.thirdParty.dest) ))
+		.pipe(gulpif(settings.autoDestToProduct, count('<%= counter %> thirdParty build & distributed') ));
+	return thirdParty;
 });
 
 /*
@@ -105,6 +117,7 @@ gulp.task('track-changes', () => {
     gulp.watch(paths.resources.src,['build_resource']);
     gulp.watch(paths.resources.images,['build_resource']);
     gulp.watch(paths.resources.settings,['build_resource']);
+    gulp.watch(paths.thirdParty,['build_resource']);
 });
 
 // First Build of new session
