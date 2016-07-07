@@ -7,11 +7,11 @@
 
 document.addEventListener('DOMContentLoaded', function() {
   chrome.tabs.onCreated.addListener(tabCreate);
-
+  
   chrome.tabs.onUpdated.addListener(tabUpdate);
-
+  
   chrome.runtime.onMessage.addListener(handleMessage);
-
+  
   initialize();
-
+  
 });
