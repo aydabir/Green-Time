@@ -6,6 +6,7 @@ npm-debug.log*
 product/
 ./development/node_modules/
 ./development/thirdparty
+./development/manifest.json
 # Runtime data
 pids
 *.pid
