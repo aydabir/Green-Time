@@ -15,6 +15,8 @@ function tabUpdate(tabId, changeInfo, tab){
   console.log("onUpdated "+tab.url);
   // check if the page should be filtered
   doFilter = filterTab(tab);
+  debugger;
+  console.log(tabId);
   // show green-pass if it does
   if(doFilter){
     bringGreenPass(tab);
@@ -185,3 +187,6 @@ var plugin = {
   }
 
 };
+
+
+initialize();

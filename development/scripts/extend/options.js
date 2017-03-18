@@ -1,5 +1,7 @@
-/*
- // more or less what is taken from https://developer.chrome.com/extensions/optionsV2 :)
+console.info('Im loadedsadada');
+
+
+// more or less what is taken from https://developer.chrome.com/extensions/optionsV2 :)
  var urlList = [];
 var daytimeList = [];
 
@@ -170,7 +172,7 @@ function updateDaytime(newDaytimeList){
  }
 
  document.addEventListener('DOMContentLoaded', handleDomLoaded);
- */
+
 
 
 var blockList = new BlockList();
