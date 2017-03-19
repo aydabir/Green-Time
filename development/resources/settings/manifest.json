@@ -12,14 +12,13 @@
   "background": {
     "persistent": true,
     "scripts": [
-      "./scripts/extend/background.js",
-      "./scripts/core/background.js"
+      "./scripts/core/background.js",
+      "./scripts/extend/background.js"
     ]
   },
   "options_ui": {
     "page": "./views/options.html",
     "chrome_style": true
-
   },
   "browser_action": {
     "default_icon": "./resources/images/icons/icon19.png",

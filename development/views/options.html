@@ -1,19 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Options</title>
-  <script src="../scripts/extend/options.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+
+    <link rel="stylesheet" href="../third_party/bootstrap.min.css">
+    <link rel="stylesheet" href="../third_party/font-awesome.min.css">
+    <link rel="stylesheet" href="../third_party/fancygrid.min.css">
+    <link rel="stylesheet" href="../third_party/tabdrop.css">
+
+    <style>
+        body {
+            min-width: 900px;
+            padding-top: 50px;
+        }
+    </style>
+
+    <style>
+        .action-column-remove {
+            cursor: pointer;
+            padding: 5px;
+            position: relative;
+            top: -5px;
+            border-radius: 2px;
+            background-color: #E4827D;
+            color: #FFF;
+        }
+
+        .action-column-remove:hover {
+            background-color: #F9DDE0;
+        }
+
+        .main-tab {
+            padding-bottom: 50px;
+            margin-right: 66px;
+        }
+
+        .intervals{
+            overflow-x: hidden;
+            overflow-y: auto;
+            max-height:8em;
+        }
+    </style>
+
+
 </head>
 <body>
-  <h2>Options</h2>
-  <p>List of URLs to filter
-  <font color="gray">(One per line)</font> </p>
-  <textarea id="urlList" rows="5" cols="30">
-facebook.com
-  </textarea>
-<br>
-  <div id="status"></div>
-  <button id="save">Save</button>
+
+
+<div class="">
+    <div class="col-xs-2">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Active</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-xs-8 main-tab">
+
+        <p>List of URLs to filter
+            <font color="gray">(One per line)</font></p>
+        <textarea id="urlList" rows="5" cols="30">facebook.com</textarea>
+        <br>
+        <p>Daytime intervals</p>
+
+
+        <div class="row">
+            <div class="col-xs-2"><b>From</b></div>
+            <div class="col-xs-1 text-xs-center"></div>
+            <div class="col-xs-2"><b>To</b></div>
+        </div>
+
+        <div class="interval interval-first row">
+            <div class="col-xs-2"><input type="time" class="from" value="00:00"></div>
+            <div class="col-xs-1 text-xs-center">-</div>
+            <div class="col-xs-2"><input type="time" class="to" value="23:59"></div>
+            <div class="col-xs-2">
+                <button id="add" class="btn-add-interval">Add</button>
+            </div>
+        </div>
+
+        <div class="intervals">
+
+        </div>
+
+        <div id="status"></div>
+        <br>
+        <button id="save">Save</button>
+
+    </div>
+
+</div>
+
+
+<script src="../third_party/jquery.min.js"></script>
+<script src="../third_party/tether.min.js"></script>
+<script src="../third_party/bootstrap.min.js"></script>
+<script src="../third_party/bootstrap-tabdrop.js"></script>
+<script src="../third_party/fancygrid.min.js"></script>
+<script src="../third_party/lodash.min.js"></script>
+<script src="../scripts/core/background.js"></script>
+<script src="../scripts/extend/background.js"></script>
+<script src="../scripts/extend/options.js"></script>
+
 </body>
 </html>
