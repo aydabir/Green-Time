@@ -28,7 +28,7 @@ Please feel free for contacting us.
   - [ ] Periodic Notifications
 - [ ] Plug-in settings UI
 - [ ] Activity time customization
-  - [ ] Daytime
+  - [X] Daytime
   - [ ] Weekdays
 - [ ] URL-List Customization
   - [X] Single list

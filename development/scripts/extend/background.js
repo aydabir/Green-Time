@@ -1,9 +1,12 @@
+console.info('Background is loaded');
+
 // Properties of background script
 var isWaiting = false; // waiting now? control variable
 var minuteMultiplier = 60*1000; // bekleme süresi: 5 dakika
 // TODO: Waiting time options
 var urlList = ["facebook.com"];
 var passUrlList = [];
+var daytimeList = [];
 
 // This function is called once in the start of the browser
 function initialize(){
@@ -15,7 +18,6 @@ function tabUpdate(tabId, changeInfo, tab){
   console.log("onUpdated "+tab.url);
   // check if the page should be filtered
   doFilter = filterTab(tab);
-  debugger;
   console.log(tabId);
   // show green-pass if it does
   if(doFilter){
@@ -66,33 +68,39 @@ function handleMessage(request, sender, sendResponse){
 // it is called at initialization
 function load_options() {
   chrome.storage.sync.get({
-    urlList: urlList
+    urlList: urlList,
+		daytimeList: daytimeList
   }, function(items) {
+
     // control the undefined case
-    if(!items || !items.urlList){
+    if(!items || items.length < 2){
+      console.error("Option items are not proper.");
       return;
     }
 
     urlList = items.urlList
+    daytimeList = items.daytimeList;
 
   });
   // log the bg console
-  console.log("options loaded");
+  console.log("Options loaded");
 }
 
 // Decides if the tab should be filtered or not
 // Checks the user URL-list
 // Also controls the waiting time
 function filterTab(tab){
+
   // check undefined (new tab situation)
   if(!tab || !tab.url){
     return false;
   }
 
   // check waiting time
-  if(isWaiting){
-    return false;
-  }
+  if(isWaiting) return false;
+
+  // check daytime
+  if(!filterDaytime()) return false;
 
   // iterate all urls in list
   len = urlList.length;
@@ -105,6 +113,28 @@ function filterTab(tab){
     if (n >= 0) return true;
   }
 
+  return false;
+}
+
+// compare current time if it fits to 'any' of the daytime intervals
+function filterDaytime() {
+  // get current time and create a string of HH:SS format
+  var currentDate = new Date();
+  var strTime = currentDate.getHours()+":"+currentDate.getMinutes()+":00";
+
+  // compare if it fits to 'any' of the interval
+  //iterate all intervals in list
+  len = daytimeList.length;
+  for(var i=0; i<len; i++){
+    // TODO: check empty/improper daytime
+    var strFrom = daytimeList[i].from+":00";
+    var strTo = daytimeList[i].to+":00";
+
+    // in this interval? then filter applies
+    if (strTime > strFrom && strTime < strTo){
+      return true
+    }
+  }
   return false;
 }
 
